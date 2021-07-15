@@ -3,13 +3,13 @@
 
 
 def matrix_transpose(matrix):
-    """transpose function"""
+    """matrix_transpose function"""
     rows = len(matrix)
     columns = len(matrix[0])
     matrix_T = []
     for i in range(columns):
         row = []
         for j in range(rows):
-           row.append(matrix[j][i])
+            row.append(matrix[j][i])
         matrix_T.append(row)
     return matrix_T

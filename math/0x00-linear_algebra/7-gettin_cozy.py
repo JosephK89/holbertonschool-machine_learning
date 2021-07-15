@@ -7,12 +7,12 @@ def cat_matrices2D(mat1, mat2, axis=0):
     matrix = []
     if axis == 0 and len(mat1[0]) == len(mat2[0]):
         for i in mat1:
-            matrix.append(x[:])
+            matrix.append(i[:])
         for i in mat2:
-            matrix.append(rows[:])
+            matrix.append(i[:])
         return matrix
     if axis == 1 and len(mat1) == len(mat2):
         for i in range(len(mat1)):
-            matrix.append(mat1[rows] + mat2[rows])
+            matrix.append(mat1[i] + mat2[i])
         return matrix
     return None

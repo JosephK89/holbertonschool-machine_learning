@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """matrix_transpose"""
 
-def transpose(matrix):
+
+def matrix_transpose(matrix):
     """transpose function"""
     rows = len(matrix)
     columns = len(matrix[0])

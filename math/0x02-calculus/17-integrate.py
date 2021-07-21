@@ -11,7 +11,7 @@ def poly_integral(poly, C=0):
         return None
     nlist.append(C)
     if sum(poly) == 0:
-        return new_L
+        return nlist
     if len(poly) == 1:
         nlist.append(poly[0])
         return nlist

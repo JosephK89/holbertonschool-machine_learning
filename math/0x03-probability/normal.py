@@ -43,4 +43,4 @@ class Normal:
         num = (x - self.mean) / (self.stddev * (2**(1/2)))
         erf = (2 / (3.1415926536**(1/2))) * (num - (num**3)/3 + (
             num**5)/10 - (num**7)/42 + (num**9)/216)
-        return (1 / 2) * (1 + erf
+        return (1 / 2) * (1 + erf)

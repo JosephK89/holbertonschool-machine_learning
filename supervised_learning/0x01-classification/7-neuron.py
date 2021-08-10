@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """neuron class module"""
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Neuron:

@@ -154,4 +154,4 @@ class DeepNeuralNetwork:
                 b = pickle.load(file_object)
                 return b
         except (OSError, IOError) as e:
-            return Non
+            return None

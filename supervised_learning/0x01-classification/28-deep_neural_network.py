@@ -97,7 +97,11 @@ class DeepNeuralNetwork:
             b = "b" + str(i)
             self.__weights[w] = self.__weights[w] - alpha * dw
             self.__weights[b] = self.__weights[b] - alpha * db
-            dz = np.matmul(weights_copy["W" + str(i)].T, dz) * (A * (1 - A))
+            if self.__activation == "sig":
+                dz = np.matmul(weights_copy["W" + str(i)].T, dz) * (
+                    A * (1 - A))
+            else:
+                dz = np.matmul(weights_copy["W" + str(i)].T, dz) * (1 - A * A)
 
     def train(self, X, Y, iterations=5000,
               alpha=0.05, verbose=True, graph=True, step=100):

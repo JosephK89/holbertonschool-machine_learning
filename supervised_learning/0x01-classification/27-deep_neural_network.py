@@ -10,25 +10,25 @@ class DeepNeuralNetwork:
     def __init__(self, nx, layers):
         """Data initialization"""
         if type(nx) != int:
-            raise TypeError("nx must be an integers")
+            raise TypeError("nx must be an integer")
         if nx < 1:
-            raise ValueError("nx must be a positive integers")
+            raise ValueError("nx must be a positive integer")
         if type(layers) != list or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
-        layer = 1
+        num_layer = 1
         layer_size = nx
         for i in layers:
-            if type(i) != int or i <= 0:
+            if type(i) != int or i < 0:
                 raise TypeError("layers must be a list of positive integers")
-            w = "W" + str(layer)
-            b = "b" + str(layer)
+            w = "W" + str(num_layer)
+            b = "b" + str(num_layer)
             self.__weights[w] = np.random.randn(
                 i, layer_size) * np.sqrt(2/layer_size)
             self.__weights[b] = np.zeros((i, 1))
-            layer += 1
+            num_layer += 1
             layer_size = i
 
     @property

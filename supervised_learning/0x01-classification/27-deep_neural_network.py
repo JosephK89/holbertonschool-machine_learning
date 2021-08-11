@@ -7,7 +7,7 @@ import pickle
 
 class DeepNeuralNetwork:
     """DeepNeuralNetwork Class"""
-    def __init__(self, nx, layers, activation='sig'):
+    def __init__(self, nx, layers):
         """Data initialization"""
         if type(nx) != int:
             raise TypeError("nx must be an integer")
@@ -15,12 +15,9 @@ class DeepNeuralNetwork:
             raise ValueError("nx must be a positive integer")
         if type(layers) != list or len(layers) == 0:
             raise TypeError("layers must be a list of positive integers")
-        if activation != "sig" and activation != "tanh":
-            raise ValueError("activation must be 'sig' or 'tanh'")
         self.__L = len(layers)
         self.__cache = {}
         self.__weights = {}
-        self.__activation = activation
         num_layer = 1
         layer_size = nx
         for i in layers:

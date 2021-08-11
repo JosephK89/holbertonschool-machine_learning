@@ -117,12 +117,12 @@ class DeepNeuralNetwork:
         if verbose is True or graph is True:
             if type(step) != int:
                 raise TypeError("step must be an integer")
-            if step <= 0 or step > iterations:
+            if step < 0 or step > iterations:
                 raise ValueError("step must be positive and <= iterations")
         _, cache = self.forward_prop(X)
         cost_list = []
         iter_x = []
-        for i in range(iterations):
+        for i in range(iterations + 1):
             A, cost = self.evaluate(X, Y)
             if verbose is True and (
                     i % step == 0 or i == 0 or i == iterations):

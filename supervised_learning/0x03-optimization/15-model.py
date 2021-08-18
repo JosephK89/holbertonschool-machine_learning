@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""A Module that will build,train,and save a neural
-    network model"""
+"""Module"""
 import tensorflow as tf
 import numpy as np
 

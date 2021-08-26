@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""confusion_matrix module"""
+"""Function that creates a confusion matrix"""
 import numpy as np
 
 
 def create_confusion_matrix(labels, logits):
-    """function that create a confusion matrix"""
-    return np.matmul(labels.T, logits)    
+    """Function that creates a confusion matrix"""
+    return (np.dot(labels.T, logits))

@@ -3,9 +3,12 @@
 model in tensorflow using Adam optimization, mini-batch
 gradient descent, learning rate decay, and batch normalization"""
 
+<<<<<<< HEAD
 
 """Module"""
 
+=======
+>>>>>>> 291701ab38bf96a60c3fc5c7de0e4323d4c3e2a9
 import tensorflow as tf
 import numpy as np
 

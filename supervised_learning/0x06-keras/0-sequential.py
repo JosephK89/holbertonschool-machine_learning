@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """build nn with keras"""
-import tensorflow.keras as k
+import tensorflow.keras as K
 
 
 def build_model(nx, layers, activations, lambtha, keep_prob):
-    """function that builds nn with keras library"""
+    """function that build nn with keras library"""
     sequential = []
     shape = (nx,)
     reg_l2 = K.regularizers.l2(lambtha)
@@ -20,4 +20,4 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
                                              activation=activations[i],
                                              kernel_regularizer=reg_l2))
     model = K.Sequential(sequential)
-    return model 
+    return model

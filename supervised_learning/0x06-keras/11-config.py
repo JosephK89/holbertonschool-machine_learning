@@ -3,12 +3,13 @@
 import tensorflow.keras as K
 
 
-def save_weights(network, filename, format='h5'):
+def save_config(network, filename):
     """function that saves model's configuration in JSON format"""
-    network.save_weights(filename, format)
+    with open(filename, "w") as json_file:
+        json_file.write(network.to_json())
 
 
-def load_weights(network, filename):
+def load_config(filename):
     """function that loads model's configuration in JSON format"""
-    return network.load_weights(filename)
-
+    with open(filename, 'r') as f:
+        return K.models.model_from_json(f.read())

@@ -1,4 +1,4 @@
-  #!/usr/bin/env python3
+#!/usr/bin/env python3
 """predict a nn module"""
 import tensorflow.keras as K
 

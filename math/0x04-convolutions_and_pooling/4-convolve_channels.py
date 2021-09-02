@@ -6,7 +6,7 @@ import numpy as np
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
     """function that performs a convolution 
        on images with channels"""
-        m, height, width, c = images.shape
+    m, height, width, c = images.shape
     kh, kw, kc = kernel.shape
     sh, sw = stride
     if padding is 'same':

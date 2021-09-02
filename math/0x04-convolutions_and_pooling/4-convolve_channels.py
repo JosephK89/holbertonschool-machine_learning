@@ -4,8 +4,10 @@ import numpy as np
 
 
 def convolve_channels(images, kernel, padding='same', stride=(1, 1)):
-    """function that performs a convolution 
-       on images with channels"""
+    """
+    Performs a convolution on images with multiple channels
+    using given padding and stride
+    """
     m, height, width, c = images.shape
     kh, kw, kc = kernel.shape
     sh, sw = stride

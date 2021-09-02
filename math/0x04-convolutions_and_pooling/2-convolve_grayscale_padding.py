@@ -4,7 +4,8 @@ import numpy as np
 
 
 def convolve_grayscale_padding(images, kernel, padding):
-    """function that performs a convolution on grayscale images with custom padding"""
+    """function that performs a convolution
+       on grayscale images with custom padding"""
     m = images.shape[0]
     height = images.shape[1]
     width = images.shape[2]

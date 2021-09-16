@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Defines a function that builds a transition layer

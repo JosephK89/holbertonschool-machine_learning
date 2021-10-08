@@ -158,17 +158,18 @@ class NST:
 
     def style_cost(self, style_outputs):
         """
-        Calculates the style cost for generated image
+        Calculates the style cost
+        Returns: the style cost
         """
-        length = len(self.style_layers)
-        if type(style_outputs) is not list or len(style_outputs) != length:
-            raise TypeError(
-                "style_outputs must be a list with a length of {}".format(
-                    length))
-        weight = 1 / length
+        if len(style_outputs) != len(self.style_layers):
+            raise TypeError("style_outputs must be a list with a length of \
+            {l} where {l} is the length of self.style_layers")
         style_cost = 0
-        for i in range(length):
-            style_cost += (
-                self.layer_style_cost(style_outputs[i],
-                                      self.gram_style_features[i]) * weight)
+        weight_per_layer = 1.0 / len(style_outputs)
+        for i in range(len(style_outputs)):
+            layer_style_cost = self.layer_style_cost(
+                style_outputs[i],
+                self.gram_style_features[i])
+            style_cost += tf.reduce_sum(layer_style_cost) * weight_per_layer
         return style_cost
+

@@ -105,15 +105,30 @@ class Yolo:
         """
         Suppresses all non-max filter boxes to return predicted bounding box
         """
-        box_predictions = []
-        predicted_box_classes = []
-        predicted_box_scores = []
+        idx = np.lexsort((-box_scores, box_classes))
+        sorted_box_pred = filtered_boxes[idx]
+        sorted_box_class = box_classes[idx]
+        sorted_box_scores = box_scores[idx]
+        _, counts = np.unique(sorted_box_class,
+                              return_counts=True)
 
-        for i, b in enumerate(filtered_boxes):
-            box_class = box_classes[i]
-            box_score = box_scores[i]
-
-            index = np.where(box_score >= self.nms_t)
-
-            box_predictions.append(b[index])
-            predicted_box_classes.append()
+        i = 0
+        n = 0
+        for count in counts:
+            while i < n + count:
+                j = i + 1
+                while j < n + count:
+                    temp = self.iou(sorted_box_pred[i], sorted_box_pred[j])
+                    if temp > self.nms_t:
+                        sorted_box_pred = np.delete(sorted_box_pred,
+                                                    j, axis=0)
+                        sorted_box_scores = np.delete(sorted_box_scores,
+                                                      j, axis=0)
+                        sorted_box_class = np.delete(sorted_box_class,
+                                                     j, axis=0)
+                        count -= 1
+                    else:
+                        j += 1
+                i += 1
+            n += count
+        return sorted_box_pred, sorted_box_class, sorted_box_scores

@@ -105,30 +105,19 @@ class Yolo:
         """
         Suppresses all non-max filter boxes to return predicted bounding box
         """
-        idx = np.lexsort((-box_scores, box_classes))
-        sorted_box_pred = filtered_boxes[idx]
-        sorted_box_class = box_classes[idx]
-        sorted_box_scores = box_scores[idx]
-        _, counts = np.unique(sorted_box_class,
-                              return_counts=True)
-
-        i = 0
-        n = 0
-        for count in counts:
-            while i < n + count:
-                j = i + 1
-                while j < n + count:
-                    temp = self.iou(sorted_box_pred[i], sorted_box_pred[j])
-                    if temp > self.nms_t:
-                        sorted_box_pred = np.delete(sorted_box_pred,
-                                                    j, axis=0)
-                        sorted_box_scores = np.delete(sorted_box_scores,
-                                                      j, axis=0)
-                        sorted_box_class = np.delete(sorted_box_class,
-                                                     j, axis=0)
-                        count -= 1
-                    else:
-                        j += 1
-                i += 1
-            n += count
-        return sorted_box_pred, sorted_box_class, sorted_box_scores
+        inds_sorted = np.argsort(box_classes)
+        box_scores_sorted = box_scores[inds_sorted]
+        box_classes_sorted = box_classes[inds_sorted]
+        filtered_boxes_sorted = filtered_boxes[inds_sorted]
+        idx = []
+        for i in range(len(box_scores_sorted)):
+            for j in range(i + 1, len(box_scores_sorted)):
+                if (box_classes_sorted[j] == box_classes_sorted[i]):
+                    union_score = self.iou(filtered_boxes_sorted[j],
+                                           filtered_boxes_sorted[i])
+                    if union_score < self.nms_t:
+                        idx.append(j)
+        box_predictions = filtered_boxes_sorted[idx]
+        predicted_box_classes = box_classes_sorted[idx]
+        predicted_box_scores = box_scores_sorted[idx]
+        return(box_predictions, predicted_box_classes, predicted_box_scores)
